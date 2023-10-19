@@ -1,8 +1,10 @@
 # factcheck.py
 
+import torch
 from typing import List
 import numpy as np
 import spacy
+import gc
 
 
 class FactExample:
@@ -29,16 +31,25 @@ class EntailmentModel:
         self.model = model
         self.tokenizer = tokenizer
 
-    def check_entailment(self, premise: str, hypothesis:str ):
-        # Tokenize the premise and hypothesis
-        inputs = self.tokenizer(premise, hypothesis, return_tensors='pt', truncation=True, padding=True)
-        # Get the model's prediction
-        outputs = self.model(**inputs)
-        logits = outputs.logits
+    def check_entailment(self, premise: str, hypothesis: str):
+        with torch.no_grad():
+            # Tokenize the premise and hypothesis
+            inputs = self.tokenizer(premise, hypothesis, return_tensors='pt', truncation=True, padding=True)
+            # Get the model's prediction
+            outputs = self.model(**inputs)
+            logits = outputs.logits
 
-        # Note that the labels are ["contradiction", "neutral", "entailment"]. There are a number of ways to map
+        # Note that the labels are ["entailment", "neutral", "contradiction"]. There are a number of ways to map
         # these logits or probabilities to classification decisions; you'll have to decide how you want to do this.
+
         raise Exception("Not implemented")
+
+        # To prevent out-of-memory (OOM) issues during autograding, we explicitly delete
+        # objects inputs, outputs, logits, and any results that are no longer needed after the computation.
+        del inputs, outputs, logits
+        gc.collect()
+
+        # return something
 
 
 class FactChecker(object):
@@ -73,6 +84,9 @@ class WordRecallThresholdFactChecker(object):
 
 
 class EntailmentFactChecker(object):
+    def __init__(self, ent_model):
+        self.ent_model = ent_model
+
     def predict(self, fact: str, passages: List[dict]) -> str:
         raise Exception("Implement me")
 
