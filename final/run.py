@@ -197,6 +197,7 @@ def main():
                     f.write('\n')
             else:
                 for i, example in enumerate(eval_dataset):
+                    print(example)
                     example_with_prediction = dict(example)
                     example_with_prediction['predicted_scores'] = eval_predictions.predictions[i].tolist()
                     example_with_prediction['predicted_label'] = int(eval_predictions.predictions[i].argmax())
