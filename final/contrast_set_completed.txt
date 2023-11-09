@@ -1,0 +1,5 @@
+{'premise': 'Two women are embracing while holding to go packages.', 'hypothesis': 'The brothers are hugging goodbye while holding to go packages after just eating lunch.', 'label': 2}
+{'premise': 'Two young children in blue jerseys, one with the number 9 and one with the number 2 are standing on wooden steps in a bathroom and washing their hands in a sink.', 'hypothesis': 'Two kids in green jerseys wash their hands.', 'label': 2}
+{'premise': 'A man selling donuts to a customer during a world exhibition event held in the city of Angeles', 'hypothesis': 'A man selling donuts to a customer in a bakery shop.', 'label': 2}
+{'premise': 'Two young boys of opposing teams play football, while wearing full protection uniforms and helmets.', 'hypothesis': 'boys play football without protection', 'label': 2}
+{'premise': 'A man in a blue shirt standing in front of a garage-like structure painted with geometric designs.', 'hypothesis': 'A woman is repainting a garage', 'label': 2}
